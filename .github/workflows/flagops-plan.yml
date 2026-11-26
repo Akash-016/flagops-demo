@@ -18,7 +18,7 @@ jobs:
     # machine or private network, use a self-hosted runner.
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: Akash-016/flagops@main
         with:
           command: plan
