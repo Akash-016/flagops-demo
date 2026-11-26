@@ -4,8 +4,8 @@ flags:
     enabled: true
     value: "Diwali sale: 20% off"
   checkout_v2:
-    enabled: false
-    value: null
+    enabled: true
+    value: v2
   dark_mode:
     enabled: true
     value: null
