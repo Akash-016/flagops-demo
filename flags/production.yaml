@@ -17,7 +17,7 @@ flags:
     value: null
   max_cart_items:
     enabled: true
-    value: 10
+    value: 25
   new_search:
     enabled: false
     value: null
