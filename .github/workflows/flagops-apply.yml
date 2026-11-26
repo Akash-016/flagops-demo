@@ -1,0 +1,46 @@
+# Copy to .github/workflows/ in the repo that holds your flag files.
+# On merge to main: applies non-production flags right away, then waits for a
+# reviewer to approve before applying production.
+#
+# Setup: Settings -> Environments -> New environment "production"
+#        -> Required reviewers -> add who may approve production flag changes.
+
+name: FlagOps apply
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "flags/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: flagops-apply
+  cancel-in-progress: false
+
+jobs:
+  apply-non-production:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Akash-016/flagops@main
+        with:
+          command: apply
+          environments: Development, Staging
+          api-url: ${{ vars.FLAGSMITH_API_URL }}
+          admin-key: ${{ secrets.FLAGSMITH_ADMIN_KEY }}
+
+  apply-production:
+    needs: apply-non-production
+    runs-on: self-hosted
+    environment: production # waits here for a required reviewer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Akash-016/flagops@main
+        with:
+          command: apply
+          environments: Production
+          api-url: ${{ vars.FLAGSMITH_API_URL }}
+          admin-key: ${{ secrets.FLAGSMITH_ADMIN_KEY }}

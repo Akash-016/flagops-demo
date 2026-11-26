@@ -1,0 +1,26 @@
+# Copy to .github/workflows/ in the repo that holds your flag files.
+# On every pull request that touches flags/, posts the FlagOps plan as a comment.
+
+name: FlagOps plan
+
+on:
+  pull_request:
+    paths:
+      - "flags/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  plan:
+    # The runner must be able to reach your Flagsmith. For a Flagsmith on your own
+    # machine or private network, use a self-hosted runner.
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Akash-016/flagops@main
+        with:
+          command: plan
+          api-url: ${{ vars.FLAGSMITH_API_URL }}
+          admin-key: ${{ secrets.FLAGSMITH_ADMIN_KEY }}

@@ -1,0 +1,26 @@
+environment: Production
+flags:
+  banner_message:
+    enabled: true
+    value: "Diwali sale: 20% off"
+  checkout_v2:
+    enabled: false
+    value: null
+  dark_mode:
+    enabled: true
+    value: null
+  legacy_payments:
+    enabled: false
+    value: null
+  maintenance_mode:
+    enabled: false
+    value: null
+  max_cart_items:
+    enabled: true
+    value: 10
+  new_search:
+    enabled: false
+    value: null
+  popcorn_ordering:
+    enabled: false
+    value: null
