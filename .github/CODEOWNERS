@@ -1,2 +1,3 @@
 # Workflow changes decide what runs with the Flagsmith admin key, so they need the owner's review.
-/.github/workflows/ @Akash-016
+# /.github/ covers this file too, so nobody can remove themselves from review.
+/.github/ @Akash-016
