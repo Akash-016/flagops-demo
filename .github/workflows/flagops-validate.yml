@@ -1,0 +1,19 @@
+# Checks the flag files offline on every pull request, on GitHub's own runners.
+# Runs on every pull request so "validate" can be a required status check.
+
+name: FlagOps validate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: Akash-016/flagops@main
+        with:
+          command: validate
