@@ -24,3 +24,6 @@ flags:
   popcorn_ordering:
     enabled: true
     value: null
+  new_checkout_banner:
+    enabled: true
+    value: "Free delivery today"

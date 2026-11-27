@@ -24,3 +24,6 @@ flags:
   popcorn_ordering:
     enabled: false
     value: null
+  new_checkout_banner:
+    enabled: false
+    value: null
