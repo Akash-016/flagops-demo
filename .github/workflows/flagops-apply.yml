@@ -1,9 +1,9 @@
-# Copy to .github/workflows/ in the repo that holds your flag files.
 # On merge to main: applies non-production flags right away, then waits for a
 # reviewer to approve before applying production.
 #
-# Setup: Settings -> Environments -> New environment "production"
-#        -> Required reviewers -> add who may approve production flag changes.
+# The admin key is only in the "non-production" and "production" GitHub Environments,
+# both limited to main, so no pull request workflow can read it.
+# Self-hosted runner: see README for why.
 
 name: FlagOps apply
 
@@ -23,9 +23,10 @@ concurrency:
 jobs:
   apply-non-production:
     runs-on: self-hosted
+    environment: non-production
     steps:
       - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@main
+      - uses: Akash-016/flagops@v1
         with:
           command: apply
           environments: Development, Staging
@@ -38,7 +39,7 @@ jobs:
     environment: production # waits here for a required reviewer
     steps:
       - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@main
+      - uses: Akash-016/flagops@v1
         with:
           command: apply
           environments: Production

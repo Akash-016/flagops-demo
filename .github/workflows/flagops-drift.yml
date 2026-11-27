@@ -1,6 +1,6 @@
-# Copy to .github/workflows/ in the repo that holds your flag files.
 # Checks once a day whether someone changed flags outside Git (for example in the
 # Flagsmith dashboard). Opens an issue listing the drift, and closes it once fixed.
+# Reads flags with read-only server-side keys, never the admin key.
 
 name: FlagOps drift check
 
@@ -18,8 +18,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@main
+      - uses: Akash-016/flagops@v1
         with:
           command: drift
           api-url: ${{ vars.FLAGSMITH_API_URL }}
-          admin-key: ${{ secrets.FLAGSMITH_ADMIN_KEY }}
+          environment-keys: ${{ secrets.FLAGSMITH_ENVIRONMENT_KEYS }}
