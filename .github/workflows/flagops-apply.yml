@@ -1,4 +1,4 @@
-# On merge to main: applies non-production flags right away, then waits for a
+# On merge to main: applies non-production flags first, then waits for a
 # reviewer to approve before applying production.
 #
 # The admin key is only in the "non-production" and "production" GitHub Environments,
@@ -16,14 +16,14 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: flagops-apply
-  cancel-in-progress: false
-
 jobs:
   apply-non-production:
     runs-on: self-hosted
     environment: non-production
+    # One group per job, so non-production never waits behind an earlier run's
+    # production approval. A newer pending run replaces an older one; it applies
+    # the latest main, which includes the older change.
+    concurrency: flagops-apply-non-production
     steps:
       - uses: actions/checkout@v5
       - uses: Akash-016/flagops@v1
@@ -37,6 +37,7 @@ jobs:
     needs: apply-non-production
     runs-on: self-hosted
     environment: production # waits here for a required reviewer
+    concurrency: flagops-apply-production
     steps:
       - uses: actions/checkout@v5
       - uses: Akash-016/flagops@v1

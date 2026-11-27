@@ -5,7 +5,7 @@ each environment live in `flags/`. To change a flag, edit its YAML file and open
 
 1. `validate` checks the files on every pull request (a required check).
 2. A bot comments on the pull request with the plan: which flags change, from what, to what, and where the code uses them.
-3. On merge, Development and Staging update right away.
+3. On merge, Development and Staging update first.
 4. Production waits until a reviewer approves the deployment.
 5. A daily drift check opens an issue if someone changes a flag in the Flagsmith dashboard, and closes it once Git and Flagsmith match again.
 
@@ -13,6 +13,7 @@ each environment live in `flags/`. To change a flag, edit its YAML file and open
 
 - `plan` and `drift` read flags with read-only server-side environment keys (repository secret `FLAGSMITH_ENVIRONMENT_KEYS`).
 - Only `apply` gets the admin key, from the `non-production` and `production` GitHub Environments. Both accept deployments from `main` only, so a pull request workflow can't read the key.
+- `CODEOWNERS` covers all of `.github/`, itself included. This is a one-person repository, so it can't require a second reviewer: the production approval here guards against mistakes, not against the owner. A team should require approvals, as the [security model](https://github.com/Akash-016/flagops#security-model) explains.
 
 ## Why a self-hosted runner
 
