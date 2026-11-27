@@ -1,5 +1,5 @@
 # Demo setup: Flagsmith runs on the maintainer's machine, so plan uses a self-hosted runner.
-# validate needs no secrets and runs on GitHub's own runners, also for fork pull requests.
+# flagops-validate.yml checks the files on GitHub's own runners.
 
 name: FlagOps plan
 
@@ -13,16 +13,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@main
-        with:
-          command: validate
-
   plan:
-    needs: validate
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: self-hosted
     steps:
