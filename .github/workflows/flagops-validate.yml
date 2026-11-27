@@ -14,6 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@main
+      - uses: Akash-016/flagops@v1
         with:
           command: validate

@@ -1,4 +1,6 @@
-# Demo setup: Flagsmith runs on the maintainer's machine, so plan uses a self-hosted runner.
+# Posts the FlagOps plan on pull requests that change flags/.
+# Reads flags with read-only server-side keys, never the admin key.
+# Self-hosted runner: see README for why. Never runs for fork pull requests.
 # flagops-validate.yml checks the files on GitHub's own runners.
 
 name: FlagOps plan
@@ -18,8 +20,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@main
+      - uses: Akash-016/flagops@v1
         with:
           command: plan
           api-url: ${{ vars.FLAGSMITH_API_URL }}
-          admin-key: ${{ secrets.FLAGSMITH_ADMIN_KEY }}
+          environment-keys: ${{ secrets.FLAGSMITH_ENVIRONMENT_KEYS }}
