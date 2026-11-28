@@ -18,7 +18,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: Akash-016/flagops@ba07fc5f509e30548cba41e8352bc7301dbd0c6e # v1.1.4
+      - uses: Akash-016/flagops@12338307c8724a5a1f624deea673c7b330dc3b8b # v1.1.6
         with:
           command: drift
           timeout: 120 # Flagsmith runs on a laptop here; it can be slow
