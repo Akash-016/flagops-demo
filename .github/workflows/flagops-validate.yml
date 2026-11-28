@@ -12,8 +12,9 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: Akash-016/flagops@d33aa9cd64a1eb1755f0abe6c3b9fdba9e230d1c # v1.1.7
+      - uses: Akash-016/flagops@4726e2a3b1cb098e55490dba3c1ba92aeab3035f # v1.3.1
         with:
           command: validate
