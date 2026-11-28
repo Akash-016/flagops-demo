@@ -6,14 +6,24 @@ each environment live in `flags/`. To change a flag, edit its YAML file and open
 1. `validate` checks the files on every pull request (a required check).
 2. A bot comments on the pull request with the plan: which flags change, from what, to what, and where the code uses them.
 3. On merge, Development and Staging update first.
-4. Production waits until a reviewer approves the deployment.
+4. Production waits in its own job until it is released (see "One maintainer" below).
 5. A daily drift check opens an issue if someone changes a flag in the Flagsmith dashboard, and closes it once Git and Flagsmith match again.
 
 ## Keys
 
 - `plan` and `drift` read flags with read-only server-side environment keys (repository secret `FLAGSMITH_ENVIRONMENT_KEYS`).
 - Only `apply` gets the admin key, from the `non-production` and `production` GitHub Environments. Both accept deployments from `main` only, so a pull request workflow can't read the key.
-- `CODEOWNERS` covers all of `.github/`, itself included. This is a one-person repository, so it can't require a second reviewer: the production approval here guards against mistakes, not against the owner. A team should require approvals, as the [security model](https://github.com/Akash-016/flagops#security-model) explains.
+- `CODEOWNERS` covers all of `.github/`, itself included.
+- The apply jobs, which hold the admin key, pin FlagOps and `actions/checkout` to a commit instead of a moving tag.
+
+## One maintainer
+
+This repository has one maintainer, so it can't show a second person's review, and it departs from the [FlagOps quick start](https://github.com/Akash-016/flagops#quick-start) in two ways:
+
+- The `production` environment has Prevent self-review on, and the maintainer is its only reviewer, so they can't approve their own deployment. GitHub's "Allow administrators to bypass" is left on, and the maintainer releases Production as admin. GitHub records that as skipped, not approved ([example](https://github.com/Akash-016/flagops-demo/actions/runs/46086054326)).
+- The ruleset lets the maintainer bypass required approvals on `main`.
+
+So here the production step guards against mistakes, not against the owner. A team should turn admin bypass off and require approvals, as the [security model](https://github.com/Akash-016/flagops#security-model) explains; then Production really waits for a second person.
 
 ## Why a self-hosted runner
 
