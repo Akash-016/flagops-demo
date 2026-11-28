@@ -28,7 +28,7 @@ jobs:
     concurrency: flagops-apply-non-production
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: Akash-016/flagops@8f999fd384a932a91043133bdc5dda74b4929f2b # v1.4.0, pinned: this job holds the admin key
+      - uses: Akash-016/flagops@cd63fc198ffee4ca82dca8d98e1d63760ea709b3 # v1.5.0, pinned: this job holds the admin key
         with:
           command: apply
           environments: Development, Staging # list every non-production environment here
@@ -38,10 +38,10 @@ jobs:
       # What the production job will change, in this run's summary, so the reviewer sees it
       # before releasing Production. It includes any dashboard change that apply would undo.
       - name: Production plan for the reviewer
-        uses: Akash-016/flagops@8f999fd384a932a91043133bdc5dda74b4929f2b # v1.4.0
+        uses: Akash-016/flagops@cd63fc198ffee4ca82dca8d98e1d63760ea709b3 # v1.5.0
         with:
           command: plan
-          environments: Production
+          skip-environments: Development, Staging # everything else, including environments added later
           comment: "false"
           timeout: 120
           api-url: ${{ vars.FLAGSMITH_API_URL }}
@@ -55,9 +55,9 @@ jobs:
     concurrency: flagops-apply-production
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: Akash-016/flagops@8f999fd384a932a91043133bdc5dda74b4929f2b # v1.4.0, pinned: this job holds the admin key
+      - uses: Akash-016/flagops@cd63fc198ffee4ca82dca8d98e1d63760ea709b3 # v1.5.0, pinned: this job holds the admin key
         with:
           command: apply
-          environments: Production
+          skip-environments: Development, Staging # everything else, including environments added later
           api-url: ${{ vars.FLAGSMITH_API_URL }}
           admin-key: ${{ secrets.FLAGSMITH_ADMIN_KEY }}
