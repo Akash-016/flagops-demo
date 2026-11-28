@@ -26,7 +26,7 @@ jobs:
     concurrency: flagops-apply-non-production
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: Akash-016/flagops@35f706c290513e8dab46e8a8074997578a66a2d3 # v1.1.2, pinned: this job holds the admin key
+      - uses: Akash-016/flagops@ba07fc5f509e30548cba41e8352bc7301dbd0c6e # v1.1.4, pinned: this job holds the admin key
         with:
           command: apply
           environments: Development, Staging
@@ -40,7 +40,7 @@ jobs:
     concurrency: flagops-apply-production
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: Akash-016/flagops@35f706c290513e8dab46e8a8074997578a66a2d3 # v1.1.2, pinned: this job holds the admin key
+      - uses: Akash-016/flagops@ba07fc5f509e30548cba41e8352bc7301dbd0c6e # v1.1.4, pinned: this job holds the admin key
         with:
           command: apply
           environments: Production
