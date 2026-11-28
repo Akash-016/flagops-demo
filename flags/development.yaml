@@ -3,27 +3,36 @@ flags:
   banner_message:
     enabled: true
     value: Welcome (dev)
+    segments: []
   checkout_v2:
     enabled: true
     value: v2
+    segments: []
   dark_mode:
     enabled: true
     value: null
+    segments: []
   legacy_payments:
     enabled: false
     value: null
+    segments: []
   maintenance_mode:
     enabled: false
     value: null
+    segments: []
   max_cart_items:
     enabled: true
     value: 50
+    segments: []
+  new_checkout_banner:
+    enabled: true
+    value: Free delivery today
+    segments: []
   new_search:
     enabled: true
     value: null
+    segments: []
   popcorn_ordering:
     enabled: true
     value: null
-  new_checkout_banner:
-    enabled: true
-    value: "Free delivery today"
+    segments: []
