@@ -19,9 +19,10 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@v1
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: Akash-016/flagops@ba07fc5f509e30548cba41e8352bc7301dbd0c6e # v1.1.4
         with:
           command: plan
+          timeout: 120 # Flagsmith runs on a laptop here; it can be slow
           api-url: ${{ vars.FLAGSMITH_API_URL }}
           environment-keys: ${{ secrets.FLAGSMITH_ENVIRONMENT_KEYS }}

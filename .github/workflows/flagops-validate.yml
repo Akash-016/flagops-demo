@@ -13,7 +13,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: Akash-016/flagops@v1
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: Akash-016/flagops@ba07fc5f509e30548cba41e8352bc7301dbd0c6e # v1.1.4
         with:
           command: validate
