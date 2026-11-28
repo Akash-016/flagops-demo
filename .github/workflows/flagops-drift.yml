@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: Akash-016/flagops@4726e2a3b1cb098e55490dba3c1ba92aeab3035f # v1.3.1
+      - uses: Akash-016/flagops@8f999fd384a932a91043133bdc5dda74b4929f2b # v1.4.0
         with:
           command: drift
           timeout: 120 # Flagsmith runs on a laptop here; it can be slow
